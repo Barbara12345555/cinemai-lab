@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  /* Cores */
+  --color-bg:           #0D0D0D;
+  --color-bg-surface:   #141414;
+  --color-bg-raised:    #1A1A1A;
+  --color-primary:      #BFF549;
+  --color-primary-soft: rgba(191, 245, 73, 0.15);
+  --color-text:         #F0F0F0;
+  --color-text-muted:   #666666;
+  --color-border:       #2A2A2A;
+  --color-danger:       #FF3B3B;
+  --color-warning:      #FFB800;
+  --color-success:      #56F27F;
+
+  /* Tipografia */
+  --font-body: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --text-xs:  12px;
+  --text-sm:  14px;
+  --text-md:  16px;
+  --text-lg:  20px;
+  --text-xl:  24px;
+  --text-2xl: 32px;
+
+  --line-tight:   1.1;
+  --line-normal:  1.4;
+  --line-relaxed: 1.6;
+
+  /* Espaçamento */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-6:  24px;
+  --sp-8:  32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+
+  /* Raio — brutalista: sem arredondamento */
+  --radius-none: 0px;
+  --radius-sm:   4px;
+
+  /* Sombras */
+  --shadow-glow: 0 0 20px rgba(191, 245, 73, 0.25);
+  --shadow-hard: 4px 4px 0 #BFF549;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  line-height: var(--line-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-border); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }
+
+/* Seleção */
+::selection {
+  background: var(--color-primary);
+  color: #111;
+}
+
+/* Utilitários de botão */
+.btn {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  padding: 10px 18px;
+  border-radius: var(--radius-none);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-surface);
+  color: var(--color-text);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  cursor: pointer;
+  transition:
+    background 0.12s ease,
+    border-color 0.12s ease,
+    transform 0.08s ease,
+    box-shadow 0.12s ease;
+}
+
+.btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #111111;
+  border-color: var(--color-primary);
+  font-weight: 700;
+  box-shadow: var(--shadow-hard);
+}
+
+.btn-primary:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--color-primary);
+}
+
+.btn-primary:active {
+  transform: translate(0, 0);
+  box-shadow: var(--shadow-hard);
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--color-text-muted);
+}
+
+.btn-ghost:hover {
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+/* Card */
+.card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  padding: var(--sp-4);
+  border-radius: var(--radius-none);
+}
+
+.card-raised {
+  background: var(--color-bg-raised);
+  box-shadow: var(--shadow-hard);
+}
+
+/* Token / pill */
+.token {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 8px;
+  border-radius: var(--radius-none);
+  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--color-text-muted);
+}
+
+.token-primary {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: var(--color-primary-soft);
+}

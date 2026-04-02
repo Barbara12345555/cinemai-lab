@@ -1,0 +1,22 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# next.js
+.next/
+out/
+
+# env
+.env
+.env.local
+.env.*.local
+
+# generated assets
+src/audio/generated/
+src/images/generated/
+
+# misc
+.DS_Store
+*.pem
+npm-debug.log*
