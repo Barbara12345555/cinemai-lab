@@ -2,12 +2,15 @@ const OPENROUTER_ENDPOINT = "https://openrouter.ai/api/v1/chat/completions";
 
 // Modelos em ordem de preferência — provedores variados para evitar rate limit
 const FALLBACK_MODELS = [
-  "openai/gpt-oss-20b:free",          // OpenAI
-  "openai/gpt-oss-120b:free",         // OpenAI
-  "nvidia/nemotron-nano-9b-v2:free",  // NVIDIA
-  "google/gemma-3-12b-it:free",       // Google AI Studio
-  "google/gemma-3-27b-it:free",       // Google AI Studio
-  "arcee-ai/trinity-large-preview:free", // Arcee
+  "meta-llama/llama-3.3-70b-instruct:free",          // Meta
+  "qwen/qwen3.6-plus:free",                           // Qwen
+  "stepfun/step-3.5-flash:free",                      // StepFun
+  "cognitivecomputations/dolphin-mistral-24b-venice-edition:free", // CogComp
+  "liquid/lfm-2.5-1.2b-instruct:free",               // Liquid
+  "nvidia/nemotron-3-nano-30b-a3b:free",              // NVIDIA
+  "meta-llama/llama-3.2-3b-instruct:free",            // Meta (small)
+  "arcee-ai/trinity-mini:free",                       // Arcee
+  "nousresearch/hermes-3-llama-3.1-405b:free",        // NousResearch
 ];
 
 interface Message {
@@ -22,8 +25,8 @@ interface GenerateOptions {
 }
 
 function adaptMessages(model: string, messages: Message[]): Message[] {
-  if (!model.includes("gemma")) return messages;
-  // Gemma não suporta role "system" — converte para "user"
+  if (!model.includes("gemma") && !model.includes("glm")) return messages;
+  // Gemma/GLM não suportam role "system" — converte para "user"
   return messages.map((m) => m.role === "system" ? { ...m, role: "user" } : m);
 }
 
@@ -88,7 +91,7 @@ export async function generateText(
     if (status !== 429 && status !== 503 && status !== 404 && status !== 402) break;
 
     // Aguarda antes de tentar o próximo para evitar rate limit encadeado
-    if (status === 429) await new Promise((r) => setTimeout(r, 3000));
+    if (status === 429) await new Promise((r) => setTimeout(r, 5000));
   }
 
   throw new Error(lastError);

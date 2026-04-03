@@ -38,7 +38,13 @@ function runRemotion(): Promise<void> {
 export async function POST() {
   try {
     await mkdir(path.join(CWD, "out"), { recursive: true });
-    await runRemotion();
+
+    // Se o vídeo já existe, serve direto sem re-renderizar
+    let videoExists = false;
+    try { await readFile(OUTPUT_PATH); videoExists = true; } catch { /* não existe */ }
+
+    if (!videoExists) await runRemotion();
+
     const video = await readFile(OUTPUT_PATH);
 
     return new NextResponse(video, {
